@@ -1,9 +1,7 @@
 package main
 
-import (
-	"mini_jira/cmd/app"
-)
+import "github.com/your-org/your-app/cmd/app"
 
 func main() {
-	app.RunApp()
+	app.Run()
 }

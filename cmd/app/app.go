@@ -1,11 +1,15 @@
 package app
 
 import (
-	"mini_jira/config"
-	"mini_jira/internal/server"
+	"log"
+
+	"github.com/your-org/your-app/config"
+	"github.com/your-org/your-app/internal/server"
 )
 
-func RunApp() {
-	config.Load()
-	server.Run()
+func Run() {
+	cfg := config.Load()
+	if err := server.Run(cfg); err != nil {
+		log.Fatal(err)
+	}
 }

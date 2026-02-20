@@ -1,43 +1,39 @@
-# MVC Go Template
+# Basic Go MVC Template
 
-Template ini adalah versi boilerplate dari struktur `mini_jira` agar bisa dipakai ulang untuk project baru.
+Template MVC dasar untuk Go, tanpa isi project lama.
 
 ## Struktur
 
-- `handler/` controller layer
+- `handler/` HTTP handler (controller)
 - `service/` business logic
 - `repository/` data access
-- `models/` entity database
-- `dto/` request/response contract
 - `routes/` route registration
-- `internal/` bootstrap server + database
-- `migrations/` migrasi schema
+- `config/` app config
+- `internal/` bootstrap server/database
+- `contract/` interface antar layer
 
-## Cara Pakai
+## Quick Start
 
-1. Clone/copy folder template ini menjadi nama project baru.
-2. Masuk ke folder project baru.
-3. Rename module Go dan semua import internal:
+1. Rename module dan import path:
 
 ```bash
 ./init_template.sh github.com/username/nama-project
 ```
 
-4. Buat file environment:
+2. Siapkan environment:
 
 ```bash
 cp .env.example .env
 ```
 
-5. Sesuaikan isi `.env` (database, JWT key, SMTP, dll).
-6. Jalankan:
+3. Jalankan aplikasi:
 
 ```bash
-go mod tidy
 go run main.go
 ```
 
-## Catatan
+4. Test endpoint:
 
-- Script `init_template.sh` wajib dijalankan sekali setelah clone agar import path tidak lagi memakai `mini_jira`.
-- Folder ini tidak menyertakan file sensitif seperti `.env` dan artefak build.
+```bash
+curl http://localhost:8080/health
+```
