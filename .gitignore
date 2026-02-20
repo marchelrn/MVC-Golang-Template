@@ -1,0 +1,61 @@
+.env
+.png
+
+# Binaries and build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.log
+*.pid
+*.prof
+*.pprof
+*.trace
+*.cover
+*.a
+*.o
+*.obj
+*.lo
+*.la
+*.dSYM/
+*.dSYM.zip
+*.dSYM.tar.gz
+*.pem
+
+# Go workspaces and tooling
+bin/
+dist/
+build/
+cover/
+coverage/
+coverage.out
+go.work
+go.work.sum
+vendor/
+bruno_docs/
+
+# Temporary files
+tmp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Air (live reload)
+tmp/
+.air/
+
