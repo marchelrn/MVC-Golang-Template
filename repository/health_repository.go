@@ -1,11 +1,21 @@
 package repository
 
-type HealthRepository struct{}
+import (
+	"github.com/marchelrn/stock_api/contract"
 
-func NewHealthRepository() *HealthRepository {
-	return &HealthRepository{}
+	"gorm.io/gorm"
+)
+
+type HealthRepository struct{
+	db *gorm.DB
+}
+
+
+func ImplHealthRepository(db *gorm.DB) contract.HealthRepository {
+	return &HealthRepository{db: db}
 }
 
 func (r *HealthRepository) GetStatus() string {
-	return "ok"
+	return "OK"
 }
+

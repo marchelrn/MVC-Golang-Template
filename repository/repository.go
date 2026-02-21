@@ -1,0 +1,13 @@
+package repository
+
+import (
+	"github.com/marchelrn/stock_api/contract"
+
+	"gorm.io/gorm"
+)
+
+func New(db *gorm.DB) *contract.Repository {
+	return &contract.Repository{
+		Health: ImplHealthRepository(db),
+	}
+}

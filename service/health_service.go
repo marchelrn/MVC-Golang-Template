@@ -1,15 +1,21 @@
 package service
 
-import "github.com/your-org/your-app/contract"
+import (
+	"github.com/marchelrn/stock_api/contract"
+	"github.com/marchelrn/stock_api/dto"
+)
 
 type HealthService struct {
-	repo contract.HealthRepository
+	health contract.HealthRepository
 }
 
-func NewHealthService(repo contract.HealthRepository) *HealthService {
-	return &HealthService{repo: repo}
+func ImplHealthService(repo contract.HealthRepository) contract.HealthService {
+	return &HealthService{health: repo}
 }
 
-func (s *HealthService) GetStatus() string {
-	return s.repo.GetStatus()
+func (s *HealthService) GetStatus() *dto.HealthResponse {
+	return &dto.HealthResponse{
+		Status: "healthy",
+		Message: "Service is healthy",
+	}
 }

@@ -1,0 +1,21 @@
+info:
+  name: Update Stocks Details
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: http://localhost:8080/portfolio/ACES
+  body:
+    type: json
+    data: |-
+      {
+        "broker": "XL"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

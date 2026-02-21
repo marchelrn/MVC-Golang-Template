@@ -1,0 +1,22 @@
+info:
+  name: Add Broker
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/broker
+  body:
+    type: json
+    data: |-
+      {
+        "name": "CC",
+        "cash": 1011900.8
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

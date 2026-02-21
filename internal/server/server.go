@@ -2,22 +2,41 @@ package server
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 
-	"github.com/your-org/your-app/config"
-	"github.com/your-org/your-app/handler"
-	"github.com/your-org/your-app/repository"
-	"github.com/your-org/your-app/routes"
-	"github.com/your-org/your-app/service"
+	"github.com/marchelrn/stock_api/config"
+	"github.com/marchelrn/stock_api/internal/database"
+	"github.com/marchelrn/stock_api/migrations"
+	"github.com/marchelrn/stock_api/repository"
+	"github.com/marchelrn/stock_api/routes"
+	"github.com/marchelrn/stock_api/service"
 )
 
-func Run(cfg config.Config) error {
-	repo := repository.NewHealthRepository()
-	svc := service.NewHealthService(repo)
-	h := handler.NewHealthHandler(svc)
+func Run() {
+	log.SetFlags(log.Ldate | log.Ltime)
+	log.SetOutput(os.Stdout)
 
-	r := routes.NewRouter(h)
-	addr := fmt.Sprintf(":%s", cfg.Port)
+	cfg := config.GetConfig()
 
-	return http.ListenAndServe(addr, r)
+	db, sqlDB := database.ConnectDB()
+	
+	repo := repository.New(db)
+	srv, err := service.New(repo)
+	if err != nil {
+		log.Fatalf("Failed to initialize services: %v", err)
+	}
+
+	r:= routes.SetupRoutes(srv)
+
+	migrations.Up(sqlDB)
+
+	serv := &http.Server{
+		Addr:    fmt.Sprintf(":%s", cfg.Port),
+		Handler: r,
+	}
+
+	log.Printf("Server is running on port %s\n", cfg.Port)
+	log.Fatal(serv.ListenAndServe())
 }
