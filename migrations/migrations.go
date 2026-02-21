@@ -16,6 +16,7 @@ type migration interface {
 func getMigrations() []migration {
 	return []migration{
 		getCreateStocksTable(),
+		getCreateTableBroker(),
 	}
 }
 
@@ -24,8 +25,8 @@ func checkDuplicateMigrationNames(migrations []migration) {
 	for _, m := range migrations {
 		if nameSet[m.Name()] {
 			panic("Duplicate Migrations Name " + m.Name())
-	}
-	nameSet[m.Name()] = true
+		}
+		nameSet[m.Name()] = true
 	}
 }
 

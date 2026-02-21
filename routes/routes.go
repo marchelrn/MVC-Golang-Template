@@ -27,7 +27,7 @@ func SetupRoutes(s *contract.Service) *gin.Engine {
 
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:3000", "https://.vercel.app"}
-	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE","OPTIONS","PATCH"}
+	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"}
 	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Accept", "X-Requested-With"}
 	config.AllowCredentials = true
 	config.ExposeHeaders = []string{"Content-Length"}
@@ -36,6 +36,9 @@ func SetupRoutes(s *contract.Service) *gin.Engine {
 	stockController := &handler.StocksController{}
 	stockController.InitService(s)
 
+	brokerController := &handler.BrokersController{}
+	brokerController.InitService(s)
+
 	api := r.Group("/")
 	{
 		api.GET("/health", func(ctx *gin.Context) {
@@ -43,7 +46,8 @@ func SetupRoutes(s *contract.Service) *gin.Engine {
 				"status": "api is healthy",
 			})
 		})
-		api.GET("/stocks/:ticker", stockController.GetStocks)
+		api.GET("/stock/:ticker", stockController.GetStocks)
+		api.GET("/broker/:name", brokerController.GetBrokersDetails)
 	}
 	return r
 }

@@ -4,14 +4,15 @@ import (
 	"github.com/marchelrn/stock_api/models"
 )
 
-type Repository struct{
-	Stocks StocksRepository
+type Repository struct {
+	Stocks  StocksRepository
+	Brokers BrokerRepository
 }
 
 type StocksRepository interface {
-	GetStocks(ticker []string) (*models.StockHolding, error)
+	GetStocks(ticker []string) ([]models.StockHolding, error)
 }
 
 type BrokerRepository interface {
-	GetBrokerDetails(brokerID int) (*models.BrokerDetails, error)
+	GetBrokerDetails(brokerName []string) ([]models.BrokerDetails, error)
 }
