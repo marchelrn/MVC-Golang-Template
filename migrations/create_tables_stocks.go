@@ -23,9 +23,11 @@ func (m *CreateStocksTable) Up(conn *sql.Tx) error {
 	_, err := conn.Exec(`
 	CREATE TABLE IF NOT EXISTS stocks (
 		id SERIAL PRIMARY KEY,
-		symbol VARCHAR(10) NOT NULL UNIQUE,
-		name VARCHAR(255) NOT NULL,
-		price NUMERIC(10, 2) NOT NULL,
+		ticker VARCHAR(10) NOT NULL UNIQUE,
+		lot INT NOT NULL,
+		avg_price NUMERIC(10, 2) NOT NULL,
+		broker_name VARCHAR(255) NOT NULL,
+		broker_id INT NOT NULL,
 		created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 		updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 	)

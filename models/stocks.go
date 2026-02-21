@@ -15,14 +15,18 @@ type BrokerDetails struct {
 }
 
 type StockHolding struct {
-	StockID int `json:"stock_id"`
+	Id int `json:"stock_id"`
 	Ticker string `json:"ticker"`
 	Lot int `json:"lot"`
-	Avg_price float64 `json:"avg_price"`
+	AvgPrice float64 `json:"avg_price"`
 	BrokerName string `json:"broker_name"`
 	BrokerID int `json:"broker_id"`
 	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
+}
+
+func (StockHolding) TableName() string {
+	return "stocks"
 }
 
 type Portfolio struct {

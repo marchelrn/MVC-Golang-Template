@@ -5,9 +5,9 @@ import "github.com/marchelrn/stock_api/dto"
 
 
 type Service struct {
-	Health HealthService
+	Stocks StocksService
 }
 
-type HealthService interface {
-	GetStatus() *dto.HealthResponse
+type StocksService interface {
+	GetStocks(stockTicker []string) (*dto.StocksResponse, error)
 }

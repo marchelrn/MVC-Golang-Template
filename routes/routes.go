@@ -33,8 +33,8 @@ func SetupRoutes(s *contract.Service) *gin.Engine {
 	config.ExposeHeaders = []string{"Content-Length"}
 	r.Use(cors.New(config))
 
-	healthController := &handler.HealthController{}
-	healthController.InitService(s)
+	stockController := &handler.StocksController{}
+	stockController.InitService(s)
 
 	api := r.Group("/")
 	{
@@ -43,6 +43,7 @@ func SetupRoutes(s *contract.Service) *gin.Engine {
 				"status": "api is healthy",
 			})
 		})
+		api.GET("/stocks/:ticker", stockController.GetStocks)
 	}
 	return r
 }

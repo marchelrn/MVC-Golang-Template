@@ -12,7 +12,7 @@ type Controller interface {
 
 func New(app *gin.Engine, service *contract.Service)  {
 	allControllers := []Controller{
-		&HealthController{},
+		&StocksController{},
 	}
 
 	for _, ctrl := range allControllers {
